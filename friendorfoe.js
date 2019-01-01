@@ -434,12 +434,30 @@
 // console.log(dashatize(-28369))
 
 
-function encrypt(text, n) {
+// function encrypt(text, n) {
+//
+// }
+//
+// function decrypt(encryptedText, n) {
+//
+// }
+//
+// console.log(encrypt("This is a test!", 1))
 
+function upArray(arr){
+  for (item in arr){
+    parseInt(arr[item])
+    if (arr[item].toString().length > 1 || arr[item].length > 1 || arr[item] < 0 || typeof arr[item] !== 'number' ){
+      return null
+    }
+  }
+    let string = ((parseInt(arr.join('')) + 1).toString()).split('')
+    let newNumArray = []
+    for (let i=0; i<string.length; i++) {
+      newNumArray.push(parseInt(string[i]))
+    }
+    return newNumArray;
 }
 
-function decrypt(encryptedText, n) {
-
-}
-
-console.log(encrypt("This is a test!", 1))
+// join initial array, turn into number, add one, split into new array, output.
+console.log(upArray([NaN]))
