@@ -444,20 +444,89 @@
 //
 // console.log(encrypt("This is a test!", 1))
 
-function upArray(arr){
-  for (item in arr){
-    parseInt(arr[item])
-    if (arr[item].toString().length > 1 || arr[item].length > 1 || arr[item] < 0 || typeof arr[item] !== 'number' ){
-      return null
+// function upArray(arr){
+//   for (item in arr){
+//     parseInt(arr[item])
+//     if (arr.length == 0 || arr[item] > 10 || arr[item] < 0 || typeof arr[item] !== 'number'){
+//       return null
+//     }
+//   }
+//     let string = ((parseInt(arr.join('')) + 1).toString()).split('')
+//     let newNumArray = []
+//     for (let i=0; i<string.length; i++) {
+//       newNumArray.push(parseInt(string[i]))
+//     }
+//     return newNumArray;
+// }
+//
+// // join initial array, turn into number, add one, split into new array, output.
+// console.log(upArray([NaN]))
+
+// function solution(string) {
+//   string = string.split('')
+//   for (let i = 0; i < string.length; i++) {
+//     if (string[i] === string[i].toUpperCase())
+//       string[i] = ' ' + string[i]
+//   }
+//   return string.join('')
+// }
+// console.log(solution('camelCasing'))
+
+Math.round = function(number) {
+  let decimalSplit = number.toString().split('.')
+  if (!decimalSplit[1]){
+    return parseInt(decimalSplit[0])
+  } else {
+  // console.log(decimalSplit)
+  let firstNumber = parseInt(decimalSplit[0]);
+  let secondNumber = 0;
+  // console.log(typeof decimalSplit[1]);
+  let array = decimalSplit[1].split('')
+  // console.log(array);
+  let numArray = [];
+  array.map(function(item) {
+    numArray.push(parseInt(item))
+  })
+  // console.log(numArray);
+  while (numArray.length > 1) {
+    if (numArray[numArray.length -1] <= 5){
+      numArray.pop()
+    }
+    if (numArray[numArray.length - 1] > 5) {
+      numArray[numArray.length - 2] +=1
+      numArray.pop()
     }
   }
-    let string = ((parseInt(arr.join('')) + 1).toString()).split('')
-    let newNumArray = []
-    for (let i=0; i<string.length; i++) {
-      newNumArray.push(parseInt(string[i]))
-    }
-    return newNumArray;
+  if (numArray[0]<5) {
+    return firstNumber
+  } else {
+    return firstNumber +1
+  }
 }
+};
+// WOULD NOT ACCEPT MY ROUND FUNCTION - THIS IS THE ONE THAT GOT UPVOTED THE MOST:
+// Math.round = function(number) {
+//   return (number - parseInt(number) >= 0.5) ? parseInt(number) + 1 : parseInt(number) ;
+// };
 
-// join initial array, turn into number, add one, split into new array, output.
-console.log(upArray([NaN]))
+Math.ceil = function(number) {
+  let decimalSplit = number.toString().split('.')
+  console.log(decimalSplit[1]);
+  if (!decimalSplit[1]){
+    return parseInt(decimalSplit[0])
+  } else {
+return parseInt(decimalSplit[0]) +1
+}
+};
+
+Math.floor = function(number) {
+  let decimalSplit = number.toString().split('.')
+  if (!decimalSplit[1]){
+    return parseInt(decimalSplit[0])
+  } else {
+  return parseInt(decimalSplit[0])}
+};
+
+console.log(Math.round(22.933));
+console.log(Math.ceil(0));
+console.log(Math.floor(0));
