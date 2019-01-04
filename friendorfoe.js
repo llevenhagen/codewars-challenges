@@ -471,62 +471,97 @@
 //   return string.join('')
 // }
 // console.log(solution('camelCasing'))
-
-Math.round = function(number) {
-  let decimalSplit = number.toString().split('.')
-  if (!decimalSplit[1]){
-    return parseInt(decimalSplit[0])
-  } else {
-  // console.log(decimalSplit)
-  let firstNumber = parseInt(decimalSplit[0]);
-  let secondNumber = 0;
-  // console.log(typeof decimalSplit[1]);
-  let array = decimalSplit[1].split('')
-  // console.log(array);
-  let numArray = [];
-  array.map(function(item) {
-    numArray.push(parseInt(item))
-  })
-  // console.log(numArray);
-  while (numArray.length > 1) {
-    if (numArray[numArray.length -1] <= 5){
-      numArray.pop()
-    }
-    if (numArray[numArray.length - 1] > 5) {
-      numArray[numArray.length - 2] +=1
-      numArray.pop()
-    }
-  }
-  if (numArray[0]<5) {
-    return firstNumber
-  } else {
-    return firstNumber +1
-  }
-}
-};
-// WOULD NOT ACCEPT MY ROUND FUNCTION - THIS IS THE ONE THAT GOT UPVOTED THE MOST:
+//
 // Math.round = function(number) {
-//   return (number - parseInt(number) >= 0.5) ? parseInt(number) + 1 : parseInt(number) ;
+//   let decimalSplit = number.toString().split('.')
+//   if (!decimalSplit[1]){
+//     return parseInt(decimalSplit[0])
+//   } else {
+//   // console.log(decimalSplit)
+//   let firstNumber = parseInt(decimalSplit[0]);
+//   let secondNumber = 0;
+//   // console.log(typeof decimalSplit[1]);
+//   let array = decimalSplit[1].split('')
+//   // console.log(array);
+//   let numArray = [];
+//   array.map(function(item) {
+//     numArray.push(parseInt(item))
+//   })
+//   // console.log(numArray);
+//   while (numArray.length > 1) {
+//     if (numArray[numArray.length -1] <= 5){
+//       numArray.pop()
+//     }
+//     if (numArray[numArray.length - 1] > 5) {
+//       numArray[numArray.length - 2] +=1
+//       numArray.pop()
+//     }
+//   }
+//   if (numArray[0]<5) {
+//     return firstNumber
+//   } else {
+//     return firstNumber +1
+//   }
+// }
 // };
+// // WOULD NOT ACCEPT MY ROUND FUNCTION - THIS IS THE ONE THAT GOT UPVOTED THE MOST:
+// // Math.round = function(number) {
+// //   return (number - parseInt(number) >= 0.5) ? parseInt(number) + 1 : parseInt(number) ;
+// // };
+//
+// Math.ceil = function(number) {
+//   let decimalSplit = number.toString().split('.')
+//   console.log(decimalSplit[1]);
+//   if (!decimalSplit[1]){
+//     return parseInt(decimalSplit[0])
+//   } else {
+// return parseInt(decimalSplit[0]) +1
+// }
+// };
+//
+// Math.floor = function(number) {
+//   let decimalSplit = number.toString().split('.')
+//   if (!decimalSplit[1]){
+//     return parseInt(decimalSplit[0])
+//   } else {
+//   return parseInt(decimalSplit[0])}
+// };
+//
+// console.log(Math.round(22.933));
+// console.log(Math.ceil(0));
+// console.log(Math.floor(0));
 
-Math.ceil = function(number) {
-  let decimalSplit = number.toString().split('.')
-  console.log(decimalSplit[1]);
-  if (!decimalSplit[1]){
-    return parseInt(decimalSplit[0])
+
+function revrot(str, sz) {
+  if (str.length < sz || sz <= 0 || str.length === 0) {
+    return ""
   } else {
-return parseInt(decimalSplit[0]) +1
+    let sum = 0;
+    for (let i = 1; i < str.length / sz; i++) {
+      sum = i;
+    }
+    array= str.split('')
+    array.splice(sz*sum)
+    let newArrayToJoin = []
+    for (let i=0; i<sum; i++){
+      let smallArray = array.slice(i*sz, (i+1)*sz)
+      // console.log(smallArray);
+      let smallArraySum = 0;
+      for (let j=0; j<sz; j++){
+        let num = parseInt(smallArray[j])
+        smallArraySum += num
+        // console.log(smallArray[j);
+      }
+      if (smallArraySum % 2 === 0){
+        newArrayToJoin.push(smallArray.reverse().join(''))
+      } else {
+        let addToBeginning = smallArray.shift();
+        smallArray.push(addToBeginning);
+        newArrayToJoin.push(smallArray)
+      }
+    }
+    return newArrayToJoin.join('').replace(/,/g, '')
+  }
 }
-};
 
-Math.floor = function(number) {
-  let decimalSplit = number.toString().split('.')
-  if (!decimalSplit[1]){
-    return parseInt(decimalSplit[0])
-  } else {
-  return parseInt(decimalSplit[0])}
-};
-
-console.log(Math.round(22.933));
-console.log(Math.ceil(0));
-console.log(Math.floor(0));
+console.log(revrot("733049910872815764", 5))
