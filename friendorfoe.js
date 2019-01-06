@@ -532,36 +532,51 @@
 // console.log(Math.floor(0));
 
 
-function revrot(str, sz) {
-  if (str.length < sz || sz <= 0 || str.length === 0) {
-    return ""
-  } else {
-    let sum = 0;
-    for (let i = 1; i < str.length / sz; i++) {
-      sum = i;
-    }
-    array= str.split('')
-    array.splice(sz*sum)
-    let newArrayToJoin = []
-    for (let i=0; i<sum; i++){
-      let smallArray = array.slice(i*sz, (i+1)*sz)
-      // console.log(smallArray);
-      let smallArraySum = 0;
-      for (let j=0; j<sz; j++){
-        let num = parseInt(smallArray[j])
-        smallArraySum += num
-        // console.log(smallArray[j);
-      }
-      if (smallArraySum % 2 === 0){
-        newArrayToJoin.push(smallArray.reverse().join(''))
-      } else {
-        let addToBeginning = smallArray.shift();
-        smallArray.push(addToBeginning);
-        newArrayToJoin.push(smallArray)
-      }
-    }
-    return newArrayToJoin.join('').replace(/,/g, '')
+// function revrot(str, sz) {
+//   if (str.length < sz || sz <= 0 || str.length === 0) {
+//     return ""
+//   } else {
+//     let sum = 0;
+//     for (let i = 1; i < str.length / sz; i++) {
+//       sum = i;
+//     }
+//     array= str.split('')
+//     array.splice(sz*sum)
+//     let newArrayToJoin = []
+//     for (let i=0; i<sum; i++){
+//       let smallArray = array.slice(i*sz, (i+1)*sz)
+//       // console.log(smallArray);
+//       let smallArraySum = 0;
+//       for (let j=0; j<sz; j++){
+//         let num = parseInt(smallArray[j])
+//         smallArraySum += num
+//         // console.log(smallArray[j);
+//       }
+//       if (smallArraySum % 2 === 0){
+//         newArrayToJoin.push(smallArray.reverse().join(''))
+//       } else {
+//         let addToBeginning = smallArray.shift();
+//         smallArray.push(addToBeginning);
+//         newArrayToJoin.push(smallArray)
+//       }
+//     }
+//     return newArrayToJoin.join('').replace(/,/g, '')
+//   }
+// }
+//
+// console.log(revrot("733049910872815764", 5))
+
+function dataReverse(data) {
+let sum = data.length / 8;
+reverseArray = []
+for (let i = 0; i<sum; i++){
+  let spliced = data.splice(0, 8);
+  for (let j=7; j>=0; j--){
+    reverseArray.unshift(spliced[j])
   }
 }
+return reverseArray
+}
 
-console.log(revrot("733049910872815764", 5))
+const data1 = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,0,1,0,1,0]
+   console.log(dataReverse(data1))
