@@ -566,17 +566,34 @@
 //
 // console.log(revrot("733049910872815764", 5))
 
-function dataReverse(data) {
-let sum = data.length / 8;
-reverseArray = []
-for (let i = 0; i<sum; i++){
-  let spliced = data.splice(0, 8);
-  for (let j=7; j>=0; j--){
-    reverseArray.unshift(spliced[j])
-  }
-}
-return reverseArray
-}
+// function dataReverse(data) {
+// let sum = data.length / 8;
+// reverseArray = []
+// for (let i = 0; i<sum; i++){
+//   let spliced = data.splice(0, 8);
+//   for (let j=7; j>=0; j--){
+//     reverseArray.unshift(spliced[j])
+//   }
+// }
+// return reverseArray
+// }
+//
+// const data1 = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,0,1,0,1,0]
+//    console.log(dataReverse(data1))
 
-const data1 = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,0,1,0,1,0]
-   console.log(dataReverse(data1))
+function findChildren(dancingBrigade){
+   let capitalArray = dancingBrigade.match(/([A-Z])/g).sort()
+   let lowercaseArray = dancingBrigade.match(/([a-z])/g).sort()
+   for (let i=0; i<lowercaseArray.length; i++){
+     for (let j=0; j<capitalArray.length; j++){
+       if (capitalArray[j].toLowerCase()===lowercaseArray[i]){
+         lowercaseArray.splice(i, 0, capitalArray[j])
+         capitalArray.splice(j, 1)
+       }
+     }
+   }
+   return lowercaseArray.join('')
+};
+
+
+console.log(findChildren("beeeEBb"));
