@@ -581,19 +581,64 @@
 // const data1 = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,0,1,0,1,0]
 //    console.log(dataReverse(data1))
 
-function findChildren(dancingBrigade){
-   let capitalArray = dancingBrigade.match(/([A-Z])/g).sort()
-   let lowercaseArray = dancingBrigade.match(/([a-z])/g).sort()
-   for (let i=0; i<lowercaseArray.length; i++){
-     for (let j=0; j<capitalArray.length; j++){
-       if (capitalArray[j].toLowerCase()===lowercaseArray[i]){
-         lowercaseArray.splice(i, 0, capitalArray[j])
-         capitalArray.splice(j, 1)
-       }
-     }
-   }
-   return lowercaseArray.join('')
-};
+// function findChildren(dancingBrigade){
+//    let capitalArray = dancingBrigade.match(/([A-Z])/g).sort()
+//    let lowercaseArray = dancingBrigade.match(/([a-z])/g).sort()
+//    for (let i=0; i<lowercaseArray.length; i++){
+//      for (let j=0; j<capitalArray.length; j++){
+//        if (capitalArray[j].toLowerCase()===lowercaseArray[i]){
+//          lowercaseArray.splice(i, 0, capitalArray[j])
+//          capitalArray.splice(j, 1)
+//        }
+//      }
+//    }
+//    return lowercaseArray.join('')
+// };
+//
+//
+// console.log(findChildren("beeeEBb"));
 
 
-console.log(findChildren("beeeEBb"));
+// function autocomplete(input, dictionary){
+//   let array = [];
+//   let inputArray = input.split('')
+//   return dictionary.map((item)=> {
+//     let itemArray = item.split('');
+//     for (let i=0; i<inputArray.length; i++){
+//       let booleanArray = []
+//       if (inputArray[i]===itemArray[i]){
+//         booleanArray.push('true')
+//       } else {
+//         booleanArray.push('false')
+//         console.log(booleanArray);
+//       }
+//       console.log(booleanArray + ',' + item);
+//       // if (booleanArray.every(each => each === true) ){
+//       //   array.push(item)
+//       //   console.log(array);
+//       // }
+//     }
+//   })
+// }
+function autocomplete(input, dictionary) {
+  input = input.split('')
+  let array = []
+  // console.log(input);
+  dictionary.filter((item) => {
+    let itemBool = []
+    for (let i = 0; i < input.length; i++) {
+      if (item[i] === input[i]) {
+        for (let j = 1; j < input.length; j++) {
+          if (item[i + j] === input[i + j]) {
+            itemBool.push('true')
+          }
+        }
+      }
+    }
+    if (itemBool.length){
+      array.push(item)
+    }
+  })
+  return array
+}
+console.log(autocomplete('ai', ['airplane', 'airport', 'apple', 'ball']))
