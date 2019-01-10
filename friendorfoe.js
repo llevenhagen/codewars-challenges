@@ -620,25 +620,98 @@
 //     }
 //   })
 // }
-function autocomplete(input, dictionary) {
-  input = input.split('')
-  let array = []
-  // console.log(input);
-  dictionary.filter((item) => {
-    let itemBool = []
-    for (let i = 0; i < input.length; i++) {
-      if (item[i] === input[i]) {
-        for (let j = 1; j < input.length; j++) {
-          if (item[i + j] === input[i + j]) {
-            itemBool.push('true')
-          }
-        }
+// function autocomplete(input, dictionary) {
+//   input = input.split('')
+//   let array = []
+//   // console.log(input);
+//   dictionary.filter((item) => {
+//     let itemBool = []
+//     for (let i = 0; i < input.length; i++) {
+//       if (item[i] === input[i]) {
+//         for (let j = 1; j < input.length; j++) {
+//           if (item[i + j] === input[i + j]) {
+//             itemBool.push('true')
+//           }
+//         }
+//       }
+//     }
+//     if (itemBool.length){
+//       array.push(item)
+//     }
+//   })
+//   return array
+// }
+// console.log(autocomplete('ai', ['airplane', 'airport', 'apple', 'ball']))
+
+// function count(string) {
+//   // let object = {'a': 1, 'b': 2}
+//   //  console.log(Object.keys(object)[0]);
+//   let object = {};
+//   string = string.split('')
+//   console.log(string);
+//   for (let i = 0; i < string.length; i++) {
+//     if (object[string[i]]) {
+//       object[string[i]]+=1
+//     } else {
+//       object[string[i]] = 1
+//     }
+//   }
+//   return object;
+// }
+//
+// console.log(count("aba"))
+
+// function incrementString (strng) {
+// strng = strng.split('')
+//  if (strng[strng.length - 1].match(/[a-z]/i)){
+//    strng = [...strng, 1]}
+//  else if (strng[strng.length - 1].match(/[0-9]/)){
+//    strng[strng.length - 1] = parseInt(strng[strng.length - 1])+1
+//  }
+//  return strng.join('');
+// }
+
+function incrementString(strng) {
+  strng = strng.split('')
+  if (! strng.map((el)=> {el.match(/[a-z0-9]/)})){
+    return NaN
+  }
+  if (strng[strng.length - 1].match(/[a-z]/i)) {
+    strng = [...strng, 1]
+  } else if (strng[strng.length - 1].match(/[0-9]/)) {
+    strng[strng.length - 1] = parseInt(strng[strng.length - 1])
+    for (let i = 1; i < strng.length; i++) {
+      if (strng[strng.length - (i + 1)].match(/[0-9]/)) {
+        strng[strng.length - (i + 1)] = parseInt(strng[strng.length - (i + 1)])
       }
     }
-    if (itemBool.length){
-      array.push(item)
+    let numArray = []
+    strng.map((el) => {
+      if (typeof el === 'number') {
+        numArray.push(el)
+      }
+    })
+    console.log(numArray);
+      numArray = (numArray.join('')).toString().replace(/^0+/,'').split('')
+      console.log(numArray);
+    if (numArray[numArray.length-1] === 9){
+      let num = parseInt(numArray.join('')) +1;
+      console.log(num);
+      numArray = num.toString().split('')
+      console.log(numArray);
+      for (let i=0; i<= numArray.length;i++){
+        strng.splice(strng.length-i, 1, numArray[numArray.length-i])
+        console.log(i);
+      }
+      console.log(numArray);
     }
-  })
-  return array
+    else {
+      strng[strng.length - 1] = parseInt(strng[strng.length -1]+1)
+    }
+  }
+  return strng.join('')
 }
-console.log(autocomplete('ai', ['airplane', 'airport', 'apple', 'ball']))
+
+
+
+console.log(incrementString("foobar0999"))
